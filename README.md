@@ -29,6 +29,7 @@ A powerful, feature-rich console-based YouTube video downloader built with C# an
 - [Technologies Used](#technologies-used)
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
+- [Creating Installer](#creating-installer)
 - [Usage](#usage)
 - [Architecture](#architecture)
 - [Project Structure](#project-structure)
@@ -349,6 +350,72 @@ dotnet build
 dotnet run --project src/YoutubeVideoDownloader.Console/YoutubeVideoDownloader.Console.csproj
 ```
 
+## 📦 Creating Installer
+
+You can create a professional Windows installer that automatically resolves all dependencies. This is perfect for distributing the application to end users.
+
+### Quick Installer Creation
+
+The easiest way to create an installer is using the provided build script:
+
+```powershell
+# From the root directory
+.\build-installer.ps1
+```
+
+This script will:
+1. ✅ Build a self-contained executable (includes .NET runtime)
+2. ✅ Create a professional installer using Inno Setup
+3. ✅ Bundle all dependencies automatically
+
+### Installer Options
+
+#### Option 1: Self-Contained Executable (Simplest)
+
+Creates a single `.exe` file with all dependencies included:
+
+```bash
+cd YoutubeVideoDownloader/src/YoutubeVideoDownloader.Console
+dotnet publish -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true
+```
+
+**Output**: `bin/Release/net10.0/win-x64/publish/YoutubeVideoDownloader.Console.exe`
+
+**Size**: ~70-100 MB (includes .NET runtime)
+
+#### Option 2: Inno Setup Installer (Recommended)
+
+Creates a professional Windows installer with:
+- ✅ Start Menu shortcuts
+- ✅ Desktop icon (optional)
+- ✅ Uninstaller
+- ✅ Dependency checking
+- ✅ All dependencies auto-resolved
+
+**Requirements**: [Inno Setup](https://jrsoftware.org/isdl.php) (free)
+
+**Usage**:
+1. Install Inno Setup
+2. Open `installer.iss` in Inno Setup Compiler
+3. Click "Build" → "Compile"
+4. Installer will be in `installer/` folder
+
+### What Gets Auto-Resolved?
+
+- ✅ **.NET 10.0 Runtime** - Included in self-contained build
+- ✅ **All NuGet Packages** - Automatically bundled
+- ✅ **FFmpeg** - Auto-downloads on first run (or can be bundled)
+
+### Detailed Guide
+
+For comprehensive instructions on creating installers, see [installer-guide.md](installer-guide.md).
+
+The guide covers:
+- Multiple installer options (Self-contained, Inno Setup, WiX)
+- Step-by-step instructions
+- Dependency auto-resolution strategies
+- Testing and distribution guidelines
+
 ## 💻 Usage
 
 ### Starting the Application
@@ -463,6 +530,14 @@ All services are registered using Microsoft.Extensions.DependencyInjection:
 
 ```
 youtube-video-downloader/
+├── README.md                    # Project documentation
+├── installer-guide.md           # Detailed installer creation guide
+├── installer.iss                # Inno Setup installer script
+├── build-installer.ps1          # Automated installer build script
+├── Contents/                    # Application screenshots
+│   ├── Screenshot 2025-12-26 205157.png
+│   ├── Screenshot 2025-12-26 205212.png
+│   └── Screenshot 2025-12-26 205240.png
 └── YoutubeVideoDownloader/
     ├── src/
     │   └── YoutubeVideoDownloader.Console/
