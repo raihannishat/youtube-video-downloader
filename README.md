@@ -2,8 +2,29 @@
 
 A powerful, feature-rich console-based YouTube video downloader built with C# and .NET 10. This application allows you to download YouTube videos in various qualities with automatic video/audio merging capabilities.
 
+## 📸 Screenshots
+
+#### 1. Application Interface
+
+![Application Interface](Contents/Screenshot%202025-12-26%20205157.png)
+
+*Main application interface showing the welcome screen and URL input prompt*
+
+#### 2. Video Information Display
+
+![Video Information Display](Contents/Screenshot%202025-12-26%20205212.png)
+
+*Video information and available quality options*
+
+#### 3. Download Progress
+
+![Download Progress](Contents/Screenshot%202025-12-26%20205240.png)
+
+*Real-time download progress with speed and ETA display*
+
 ## 📋 Table of Contents
 
+- [Screenshots](#-screenshots)
 - [Features](#features)
 - [Technologies Used](#technologies-used)
 - [Prerequisites](#prerequisites)
@@ -394,25 +415,6 @@ Merging video and audio streams...
 📂 Location: C:\Users\YourName\Downloads\Example_Video.mp4
 ```
 
-### Screenshots
-
-#### 1. Application Interface
-
-![Application Interface](Contents/Screenshot%202025-12-26%20205157.png)
-
-*Main application interface showing the welcome screen and URL input prompt*
-
-#### 2. Video Information Display
-
-![Video Information Display](Contents/Screenshot%202025-12-26%20205212.png)
-
-*Video information and available quality options*
-
-#### 3. Download Progress
-
-![Download Progress](Contents/Screenshot%202025-12-26%20205240.png)
-
-*Real-time download progress with speed and ETA display*
 
 ## 🏗️ Architecture
 
