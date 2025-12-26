@@ -16,11 +16,15 @@ A powerful, feature-rich console-based YouTube video downloader built with C# an
 
 *Video information and available quality options*
 
-#### 3. Download Progress
+#### 3. About Page
+
+*Access the about page by typing 'a' or 'i' when prompted for a URL. The about page displays developer information, application features, technologies used, and version details.*
+
+#### 4. Download Progress
 
 ![Download Progress](Contents/Screenshot%202025-12-26%20205240.png)
 
-*Real-time download progress with speed and ETA display*
+*IDM-style real-time download progress display showing progress bar, percentage, download speed (MB/s), and estimated time of arrival (ETA)*
 
 ## 📋 Table of Contents
 
