@@ -2,5 +2,7 @@
   <Folder Name="/src/">
     <Project Path="src/YoutubeVideoDownloader.Console/YoutubeVideoDownloader.Console.csproj" Id="eded854e-fbdf-45bf-a476-7d9f7089bd61" />
   </Folder>
-  <Folder Name="/test/" />
+  <Folder Name="/test/">
+    <Project Path="test/YoutubeVideoDownloader.Console.Tests/YoutubeVideoDownloader.Console.Tests.csproj" />
+  </Folder>
 </Solution>
