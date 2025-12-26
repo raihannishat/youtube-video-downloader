@@ -2,7 +2,7 @@
 ; This script creates a professional Windows installer
 
 [Setup]
-AppId={{YOUTUBE-VIDEO-DOWNLOADER-GUID}
+AppId={{8A5F8B2E-3C4D-4E5F-9A6B-7C8D9E0F1A2B}
 AppName=YouTube Video Downloader
 AppVersion=1.0.0
 AppPublisher=Raihan Nishat
@@ -15,13 +15,14 @@ AllowNoIcons=yes
 LicenseFile=
 OutputDir=installer
 OutputBaseFilename=YouTubeVideoDownloader-Setup-v1.0.0
-SetupIconFile=
+SetupIconFile=icon.ico
 Compression=lzma2
 SolidCompression=yes
 WizardStyle=modern
 ArchitecturesInstallIn64BitMode=x64
 PrivilegesRequired=admin
 DisableProgramGroupPage=no
+UninstallDisplayIcon={app}\YoutubeVideoDownloader.Console.exe
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"

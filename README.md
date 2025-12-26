@@ -406,15 +406,39 @@ Creates a professional Windows installer with:
 - ✅ **All NuGet Packages** - Automatically bundled
 - ✅ **FFmpeg** - Auto-downloads on first run (or can be bundled)
 
+### Adding Application Icon
+
+To add a custom icon to your application:
+
+1. **Create or download an icon file** (`.ico` format)
+   - Recommended: [Favicon.io](https://favicon.io/) or [IconFinder](https://www.iconfinder.com/)
+   - Format: `.ico` with multiple sizes (16x16, 32x32, 48x48, 256x256)
+   - Place `icon.ico` in the project root directory
+
+2. **Rebuild the application:**
+   ```powershell
+   .\build-installer.ps1
+   ```
+
+The icon will appear in:
+- ✅ Application executable
+- ✅ Installer
+- ✅ Desktop shortcuts
+- ✅ Start Menu shortcuts
+
+**Note:** If icon doesn't appear after installation:
+- Clean build: `dotnet clean` then rebuild
+- Clear Windows icon cache (run as Admin):
+  ```cmd
+  taskkill /f /im explorer.exe
+  del /a /q "%localappdata%\IconCache.db"
+  start explorer.exe
+  ```
+- Delete and recreate desktop shortcut
+
 ### Detailed Guide
 
 For comprehensive instructions on creating installers, see [installer-guide.md](installer-guide.md).
-
-The guide covers:
-- Multiple installer options (Self-contained, Inno Setup, WiX)
-- Step-by-step instructions
-- Dependency auto-resolution strategies
-- Testing and distribution guidelines
 
 ## 💻 Usage
 

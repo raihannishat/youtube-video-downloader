@@ -446,3 +446,22 @@ coverage/
 # Project-specific
 *.Backup.tmp
 
+# Installer output
+installer/
+*.exe
+*.msi
+
+# FFmpeg (auto-downloaded)
+ffmpeg/
+**/ffmpeg/
+
+# Application logs
+logs/
+*.log
+
+# Build outputs
+bin/
+obj/
+[Bb]in/
+[Oo]bj/
+
