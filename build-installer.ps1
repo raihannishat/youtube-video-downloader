@@ -99,8 +99,37 @@ if ($innoSetupFound) {
     Write-Host "  Installer script created but not compiled" -ForegroundColor Yellow
     Write-Host "  Please install Inno Setup from: https://jrsoftware.org/isdl.php" -ForegroundColor Yellow
     Write-Host ""
+    Write-Host "  Alternative: Creating ZIP package instead..." -ForegroundColor Cyan
+    
+    # Create a ZIP package as alternative
+    $zipPath = "installer\YouTubeVideoDownloader-v1.0.0.zip"
+    $exePath = "YoutubeVideoDownloader\$publishPath\YoutubeVideoDownloader.Console.exe"
+    
+    if (Test-Path $exePath) {
+        # Create installer directory if it doesn't exist
+        if (-not (Test-Path "installer")) {
+            New-Item -ItemType Directory -Path "installer" | Out-Null
+        }
+        
+        # Create ZIP file
+        $zipFullPath = Resolve-Path "installer" | Join-Path -ChildPath "YouTubeVideoDownloader-v1.0.0.zip"
+        $exeFullPath = Resolve-Path $exePath
+        
+        Compress-Archive -Path $exeFullPath -DestinationPath $zipFullPath -Force
+        
+        if (Test-Path $zipFullPath) {
+            $zipSize = (Get-Item $zipFullPath).Length / 1MB
+            Write-Host "✓ ZIP package created successfully!" -ForegroundColor Green
+            Write-Host "  Location: $zipFullPath" -ForegroundColor Cyan
+            Write-Host "  Size: $([math]::Round($zipSize, 2)) MB" -ForegroundColor Cyan
+            Write-Host ""
+            Write-Host "  Users can extract and run: YoutubeVideoDownloader.Console.exe" -ForegroundColor Gray
+        }
+    }
+    
+    Write-Host ""
     Write-Host "  Standalone executable available at:" -ForegroundColor Cyan
-    Write-Host "  YoutubeVideoDownloader\$publishPath\YoutubeVideoDownloader.Console.exe" -ForegroundColor Cyan
+    Write-Host "  $exePath" -ForegroundColor Cyan
 }
 
 Write-Host ""
