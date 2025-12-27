@@ -1,10 +1,10 @@
-# How to Create GitHub Release v1.1.0
+# How to Create GitHub Release v1.2.1
 
 This guide will help you create a GitHub release and upload the installer file.
 
 ## Prerequisites
 
-- Installer file exists: `installer\YouTubeVideoDownloader-Setup-v1.1.0.exe`
+- Installer file exists: `installer\YouTubeVideoDownloader-Setup-v1.2.1.exe`
 - Git repository is set up
 - You have push access to the repository
 
@@ -25,11 +25,11 @@ This guide will help you create a GitHub release and upload the installer file.
    - Click "Draft a new release" or "Create a new release"
 
 3. **Fill Release Details**
-   - **Tag version**: `v1.1.0`
-   - **Release title**: `YouTube Video Downloader v1.1.0`
+   - **Tag version**: `v1.2.1`
+   - **Release title**: `YouTube Video Downloader v1.2.1`
    - **Description**: 
      ```
-     ## 🎉 YouTube Video Downloader v1.1.0
+     ## 🎉 YouTube Video Downloader v1.2.1
 
      ### ✨ New Features
      - 📜 Download History with pagination (25 entries per page)
@@ -49,7 +49,7 @@ This guide will help you create a GitHub release and upload the installer file.
 4. **Upload Installer**
    - Scroll down to "Attach binaries"
    - Click "Choose your files"
-   - Select: `installer\YouTubeVideoDownloader-Setup-v1.1.0.exe`
+   - Select: `installer\YouTubeVideoDownloader-Setup-v1.2.1.exe`
    - Wait for upload to complete
 
 5. **Publish Release**
@@ -60,8 +60,8 @@ This guide will help you create a GitHub release and upload the installer file.
 
 1. **Create and Push Tag**
    ```bash
-   git tag -a v1.1.0 -m "Release version 1.1.0"
-   git push origin v1.1.0
+   git tag -a v1.2.1 -m "Release version 1.2.1"
+   git push origin v1.2.1
    ```
 
 2. **Then follow Option 1 steps 2-5** to create the release on GitHub web interface
@@ -69,7 +69,7 @@ This guide will help you create a GitHub release and upload the installer file.
 ## Verify Release
 
 After creating the release, verify the direct download link works:
-- https://github.com/raihannishat/youtube-video-downloader/releases/latest/download/YouTubeVideoDownloader-Setup-v1.1.0.exe
+- https://github.com/raihannishat/youtube-video-downloader/releases/latest/download/YouTubeVideoDownloader-Setup-v1.2.1.exe
 
 This link should automatically download the installer file.
 
@@ -78,6 +78,6 @@ This link should automatically download the installer file.
 - **File too large**: GitHub has a 2GB limit for releases. The installer (~70-100 MB) should be fine.
 - **Link not working**: Make sure:
   - The release is published (not draft)
-  - The file name matches exactly: `YouTubeVideoDownloader-Setup-v1.1.0.exe`
-  - The tag is `v1.1.0`
+  - The file name matches exactly: `YouTubeVideoDownloader-Setup-v1.2.1.exe`
+  - The tag is `v1.2.1`
 
