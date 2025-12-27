@@ -653,49 +653,104 @@ All services are registered using Microsoft.Extensions.DependencyInjection:
 ```
 youtube-video-downloader/
 ├── README.md                    # Project documentation
+├── .gitignore                   # Git ignore rules
+├── icon.ico                     # Application icon
 ├── installer-guide.md           # Detailed installer creation guide
 ├── installer.iss                # Inno Setup installer script
 ├── build-installer.ps1          # Automated installer build script
+├── CREATE-RELEASE.md            # Guide for creating GitHub releases
 ├── Contents/                    # Application screenshots
-│   ├── Screenshot 2025-12-26 205157.png
-│   ├── Screenshot 2025-12-26 205212.png
-│   └── Screenshot 2025-12-26 205240.png
+│   ├── 01-home.png
+│   ├── 02-about.png
+│   ├── 03-config.png
+│   ├── 04-downloading.png
+│   ├── 05-successfully_downloaded.png
+│   ├── 06-video_quality_options.png
+│   ├── 07-download_history.png
+│   └── 08-download_statistics.png
+├── installer/                   # Installer output directory
+│   ├── .gitkeep                # Keep folder in Git
+│   └── YouTubeVideoDownloader-Setup-v1.1.0.exe
 └── YoutubeVideoDownloader/
     ├── src/
     │   └── YoutubeVideoDownloader.Console/
     │       ├── Core/
     │       │   ├── Interfaces/          # Service interfaces
-    │       │   ├── Models/              # Data models (AppConfiguration)
+    │       │   │   ├── IApplicationService.cs
+    │       │   │   ├── IConfigurationService.cs
+    │       │   │   ├── IDownloadAndMergeService.cs
+    │       │   │   ├── IDownloadHistoryService.cs
+    │       │   │   ├── IDownloadService.cs
+    │       │   │   ├── IFFmpegService.cs
+    │       │   │   ├── ILoggerService.cs
+    │       │   │   └── IYouTubeService.cs
+    │       │   ├── Models/              # Data models
+    │       │   │   ├── AppConfiguration.cs
+    │       │   │   └── DownloadHistoryEntry.cs
     │       │   ├── Services/            # Service implementations
+    │       │   │   ├── ApplicationService.cs
+    │       │   │   ├── ConfigurationService.cs
+    │       │   │   ├── DownloadHistoryService.cs
+    │       │   │   ├── DownloadService.cs
+    │       │   │   ├── FFmpegService.cs
+    │       │   │   └── YouTubeService.cs
     │       │   └── DependencyInjection/ # DI setup
-    │       ├── Features/                # Feature handlers
+    │       │       └── ServiceCollectionExtensions.cs
+    │       ├── Features/                # Feature handlers (Vertical Slice)
     │       │   ├── About/
+    │       │   │   └── AboutHandler.cs
     │       │   ├── BatchDownload/
+    │       │   │   └── BatchDownloadHandler.cs
     │       │   ├── Configuration/
+    │       │   │   └── ConfigurationHandler.cs
     │       │   ├── DirectorySelection/
+    │       │   │   └── DirectorySelectionHandler.cs
     │       │   ├── Download/
+    │       │   │   ├── DownloadAndMergeHandler.cs
+    │       │   │   └── DownloadHandler.cs
     │       │   ├── DownloadHistory/
+    │       │   │   └── DownloadHistoryHandler.cs
     │       │   ├── FFmpegSetup/
+    │       │   │   └── FFmpegSetupHandler.cs
     │       │   ├── Playlist/
+    │       │   │   └── PlaylistHandler.cs
     │       │   ├── StreamSelection/
+    │       │   │   └── StreamSelectionHandler.cs
     │       │   └── VideoInfo/
-    │       ├── Common/                  # Shared code
+    │       │       └── VideoInfoHandler.cs
+    │       ├── Common/                  # Shared utilities
     │       │   ├── UI/
+    │       │   │   └── ConsoleUI.cs
     │       │   └── Utils/
-    │       ├── Infrastructure/          # Infrastructure
+    │       │       └── FileUtils.cs
+    │       ├── Infrastructure/          # Infrastructure concerns
     │       │   └── Logging/
+    │       │       ├── LoggingConfiguration.cs
+    │       │       └── SerilogLoggerService.cs
     │       ├── GlobalUsings.cs          # Global using statements
     │       ├── Program.cs               # Application entry point
     │       └── YoutubeVideoDownloader.Console.csproj
     ├── test/
     │   └── YoutubeVideoDownloader.Console.Tests/
     │       ├── Core/
+    │       │   ├── DependencyInjection/
+    │       │   │   └── ServiceCollectionExtensionsTests.cs
+    │       │   └── Services/
+    │       │       ├── DownloadServiceTests.cs
+    │       │       ├── FFmpegServiceTests.cs
+    │       │       └── YouTubeServiceTests.cs
     │       ├── Common/
+    │       │   └── Utils/
+    │       │       └── FileUtilsTests.cs
     │       ├── Features/
+    │       │   └── Download/
+    │       │       └── DownloadAndMergeHandlerTests.cs
     │       ├── Infrastructure/
+    │       │   └── Logging/
+    │       │       └── SerilogLoggerServiceTests.cs
     │       ├── GlobalUsings.cs
     │       └── YoutubeVideoDownloader.Console.Tests.csproj
-    └── YoutubeVideoDownloader.slnx
+    └── YoutubeVideoDownloader.slnx     # Solution file
 ```
 
 ## 🧪 Testing
