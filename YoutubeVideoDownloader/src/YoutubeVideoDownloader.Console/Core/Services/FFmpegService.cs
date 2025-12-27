@@ -58,12 +58,20 @@ public class FFmpegService : IFFmpegService
 
             // Try to find FFmpeg in common locations
             var appFolder = AppDomain.CurrentDomain.BaseDirectory;
-            var ffmpegFolder = Path.Combine(appFolder, "ffmpeg");
-            var ffmpegExe = Path.Combine(ffmpegFolder, "bin", "ffmpeg.exe");
+            var userDataFolder = Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                "YoutubeVideoDownloader");
+            
+            var ffmpegFolderApp = Path.Combine(appFolder, "ffmpeg");
+            var ffmpegFolderUser = Path.Combine(userDataFolder, "ffmpeg");
+            
+            var ffmpegExeApp = Path.Combine(ffmpegFolderApp, "bin", "ffmpeg.exe");
+            var ffmpegExeUser = Path.Combine(ffmpegFolderUser, "bin", "ffmpeg.exe");
             
             var commonPaths = new[]
             {
-                ffmpegExe,
+                ffmpegExeApp,
+                ffmpegExeUser,
                 Path.Combine(appFolder, "ffmpeg.exe"),
                 Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "ffmpeg", "bin", "ffmpeg.exe"),
                 "ffmpeg.exe"
@@ -91,6 +99,15 @@ public class FFmpegService : IFFmpegService
             AnsiConsole.Write(new Align(new Markup("[dim]This is a one-time setup. Please wait...[/]"), HorizontalAlignment.Center));
             AnsiConsole.WriteLine();
             
+            // Always use user data folder for downloads (always writable, no admin needed)
+            // Ensure the directory exists
+            Directory.CreateDirectory(userDataFolder);
+            var ffmpegFolder = ffmpegFolderUser;
+            var ffmpegExe = Path.Combine(ffmpegFolder, "bin", "ffmpeg.exe");
+            
+            _logger.LogInformation($"Downloading FFmpeg to user data folder: {ffmpegFolder}");
+            _logger.LogInformation($"App folder (NOT used for download): {appFolder}");
+            AnsiConsole.WriteLine();
             var downloaded = await DownloadFFmpegAsync(ffmpegFolder);
             if (downloaded && File.Exists(ffmpegExe))
             {
@@ -122,14 +139,28 @@ public class FFmpegService : IFFmpegService
         }
     }
 
+
     private async Task<bool> DownloadFFmpegAsync(string targetFolder)
     {
         try
         {
+            // Verify we're using the correct (writable) folder
+            _logger.LogInformation($"DownloadFFmpegAsync called with targetFolder: {targetFolder}");
+            
+            // Double-check: if targetFolder is in Program Files, force user data folder
+            if (targetFolder.Contains("Program Files", StringComparison.OrdinalIgnoreCase))
+            {
+                var userDataFolder = Path.Combine(
+                    Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                    "YoutubeVideoDownloader", "ffmpeg");
+                _logger.LogWarning($"Detected Program Files path, switching to user data folder: {userDataFolder}");
+                targetFolder = userDataFolder;
+            }
+            
             var downloadUrl = "https://www.gyan.dev/ffmpeg/builds/ffmpeg-release-essentials.zip";
             var zipPath = Path.Combine(Path.GetTempPath(), $"ffmpeg_{Guid.NewGuid()}.zip");
             
-            _logger.LogInformation("Starting FFmpeg download...");
+            _logger.LogInformation($"Starting FFmpeg download to: {targetFolder}");
             
             await AnsiConsole.Progress()
                 .Columns(new ProgressColumn[]
@@ -181,12 +212,45 @@ public class FFmpegService : IFFmpegService
             _logger.LogInformation("Extracting FFmpeg...");
             AnsiConsole.Write(new Align(new Markup("[cyan]Extracting FFmpeg...[/]"), HorizontalAlignment.Center));
             
-            if (Directory.Exists(targetFolder))
+            // Ensure target folder exists and is writable
+            try
             {
-                Directory.Delete(targetFolder, true);
+                _logger.LogInformation($"Preparing extraction directory: {targetFolder}");
+                
+                // Final safety check - if still in Program Files, use user data
+                if (targetFolder.Contains("Program Files", StringComparison.OrdinalIgnoreCase))
+                {
+                    var userDataFolder = Path.Combine(
+                        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                        "YoutubeVideoDownloader", "ffmpeg");
+                    _logger.LogWarning($"Program Files detected during extraction, switching to: {userDataFolder}");
+                    targetFolder = userDataFolder;
+                }
+                
+                if (Directory.Exists(targetFolder))
+                {
+                    _logger.LogInformation($"Deleting existing directory: {targetFolder}");
+                    Directory.Delete(targetFolder, true);
+                }
+                
+                _logger.LogInformation($"Creating directory: {targetFolder}");
+                Directory.CreateDirectory(targetFolder);
+                
+                // Verify we can write
+                var testFile = Path.Combine(targetFolder, "test_write.tmp");
+                File.WriteAllText(testFile, "test");
+                File.Delete(testFile);
+                _logger.LogInformation($"Directory is writable: {targetFolder}");
             }
-            Directory.CreateDirectory(targetFolder);
+            catch (Exception ex)
+            {
+                _logger.LogError($"Failed to create FFmpeg directory: {targetFolder}", ex);
+                AnsiConsole.Write(new Align(new Markup($"[bold red]✗ Cannot create directory: {targetFolder}[/]"), HorizontalAlignment.Center));
+                AnsiConsole.Write(new Align(new Markup($"[red]Error: {ex.Message}[/]"), HorizontalAlignment.Center));
+                throw new IOException($"Cannot create FFmpeg directory at {targetFolder}. Access denied or insufficient permissions.", ex);
+            }
             
+            _logger.LogInformation($"Extracting ZIP to: {targetFolder}");
             ZipFile.ExtractToDirectory(zipPath, targetFolder);
             
             var extractedFolders = Directory.GetDirectories(targetFolder);
