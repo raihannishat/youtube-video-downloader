@@ -77,11 +77,12 @@ A powerful, feature-rich console-based YouTube video downloader built with C# an
 
 Download the pre-built installer for Windows:
 
-- **📦 Installer**: [Download YouTube Video Downloader v1.1.0](https://github.com/raihannishat/youtube-video-downloader/releases/latest/download/YouTubeVideoDownloader-Setup-v1.1.0.exe)
+- **📦 Installer**: [Download YouTube Video Downloader v1.1.0](https://github.com/raihannishat/youtube-video-downloader/releases/latest/download/YouTubeVideoDownloader-Setup-v1.1.0.exe) (Direct Download)
   - File: `YouTubeVideoDownloader-Setup-v1.1.0.exe`
   - Size: ~70-100 MB (includes .NET runtime)
   - No additional dependencies required
-  - Direct download: Click the link above to automatically download the installer
+  - **Direct download**: Click the link above to automatically download the installer
+  - **Alternative**: Visit [Releases Page](https://github.com/raihannishat/youtube-video-downloader/releases/latest) for release notes and other download options
 
 ### Build from Source
 
@@ -506,6 +507,15 @@ The icon will appear in:
   start explorer.exe
   ```
 - Delete and recreate desktop shortcut
+
+### Creating GitHub Release
+
+To publish the installer as a GitHub release with direct download link:
+
+1. Build the installer using the steps above
+2. Follow the guide: [CREATE-RELEASE.md](CREATE-RELEASE.md)
+3. Upload the installer file to GitHub Releases
+4. The direct download link will be automatically available
 
 ### Detailed Guide
 
