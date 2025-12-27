@@ -18,6 +18,7 @@ global using YoutubeExplode.Videos;
 global using YoutubeExplode.Videos.Streams;
 
 global using YoutubeVideoDownloader.Console.Core.Interfaces;
+global using YoutubeVideoDownloader.Console.Core.Models;
 global using YoutubeVideoDownloader.Console.Core.Services;
 global using YoutubeVideoDownloader.Console.Core.DependencyInjection;
 global using YoutubeVideoDownloader.Console.Common.Utils;
