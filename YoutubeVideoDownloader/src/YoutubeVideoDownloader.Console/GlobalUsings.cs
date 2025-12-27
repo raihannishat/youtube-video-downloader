@@ -35,12 +35,16 @@ global using YoutubeVideoDownloader.Console.Common.Utils;
 // Core - Business logic, services, and dependency injection
 global using YoutubeVideoDownloader.Console.Core.DependencyInjection;
 global using YoutubeVideoDownloader.Console.Core.Interfaces;
+global using YoutubeVideoDownloader.Console.Core.Models;
 global using YoutubeVideoDownloader.Console.Core.Services;
 
 // Features - Feature-specific handlers organized by vertical slice architecture
 global using YoutubeVideoDownloader.Console.Features.About;
+global using YoutubeVideoDownloader.Console.Features.BatchDownload;
+global using YoutubeVideoDownloader.Console.Features.Configuration;
 global using YoutubeVideoDownloader.Console.Features.DirectorySelection;
 global using YoutubeVideoDownloader.Console.Features.Download;
+global using YoutubeVideoDownloader.Console.Features.DownloadHistory;
 global using YoutubeVideoDownloader.Console.Features.FFmpegSetup;
 global using YoutubeVideoDownloader.Console.Features.Playlist;
 global using YoutubeVideoDownloader.Console.Features.StreamSelection;

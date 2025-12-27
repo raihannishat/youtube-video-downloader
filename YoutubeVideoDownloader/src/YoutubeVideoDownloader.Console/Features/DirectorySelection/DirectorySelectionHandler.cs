@@ -6,10 +6,12 @@ public static class DirectorySelectionHandler
     {
         AnsiConsole.WriteLine();
         var defaultPath = defaultDirectory;
-        var message = $"[bold cyan]📂[/] Enter output directory (or Enter for default):\n[dim]Default: {defaultPath}[/]";
+        
+        // Display default path separately
+        AnsiConsole.MarkupLine($"[dim]Default: {defaultPath}[/]");
         
         var userInput = AnsiConsole.Prompt(
-            new TextPrompt<string>(message)
+            new TextPrompt<string>("[bold cyan]📂[/] Enter output directory (or Enter for default):")
                 .PromptStyle("cyan")
                 .AllowEmpty()
                 .Validate(path =>

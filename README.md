@@ -2,29 +2,10 @@
 
 A powerful, feature-rich console-based YouTube video downloader built with C# and .NET 10. This application allows you to download YouTube videos in various qualities with automatic video/audio merging capabilities.
 
-## 📸 Screenshots
-
-#### 1. Application Interface
-
-![Application Interface](Contents/Screenshot%202025-12-26%20205157.png)
-
-*Main application interface showing the welcome screen and URL input prompt*
-
-#### 2. Video Information Display
-
-![Video Information Display](Contents/Screenshot%202025-12-26%20205212.png)
-
-*Video information and available quality options*
-
-#### 3. About Page
-
-![Download Progress](Contents/Screenshot%202025-12-26%20205240.png)
-
-*Access the about page by typing 'a' or 'i' when prompted for a URL. The about page displays developer information, application features, technologies used, and version details.*
-
 ## 📋 Table of Contents
 
 - [Screenshots](#-screenshots)
+- [Download](#-download)
 - [Features](#features)
 - [Technologies Used](#technologies-used)
 - [Prerequisites](#prerequisites)
@@ -34,9 +15,85 @@ A powerful, feature-rich console-based YouTube video downloader built with C# an
 - [Architecture](#architecture)
 - [Project Structure](#project-structure)
 - [Testing](#testing)
-- [Logging](#logging)
+- [Configuration](#-configuration)
+- [Download History](#-download-history)
+- [Logging](#-logging)
 - [Developer Information](#developer-information)
 - [License](#license)
+
+## 📸 Screenshots
+
+#### 1. Home Screen
+
+![Home Screen](Contents/01-home.png)
+
+*Main application interface showing the welcome screen with ASCII art header and URL input prompt with all available commands.*
+
+#### 2. About Page
+
+![About Page](Contents/02-about.png)
+
+*Access the about page by typing 'a' or 'i' when prompted for a URL. The about page displays developer information, application features, technologies used, and version details.*
+
+#### 3. Configuration Menu
+
+![Configuration Menu](Contents/03-config.png)
+
+*Configuration menu accessible by typing 'c' or 'C'. View, edit, or reset application settings including default download directory, quality preferences, and logging options.*
+
+#### 4. Download Progress
+
+![Download Progress](Contents/04-downloading.png)
+
+*Real-time download progress display with IDM-style progress bar showing download speed, percentage, ETA, and file information.*
+
+#### 5. Successfully Downloaded
+
+![Successfully Downloaded](Contents/05-successfully_downloaded.png)
+
+*Download completion confirmation showing the downloaded file path, size, and location.*
+
+#### 6. Video Quality Options
+
+![Video Quality Options](Contents/06-video_quality_options.png)
+
+*Available video quality options displayed in a formatted table showing muxed streams, video-only streams, and audio-only options with file sizes.*
+
+#### 7. Download History
+
+![Download History](Contents/07-download_history.png)
+
+*Download history view showing a paginated list of all downloaded videos with title, quality, size, and download date. Access by typing 'h' or 'H'.*
+
+#### 8. Download Statistics
+
+![Download Statistics](Contents/08-download_statistics.png)
+
+*Comprehensive download statistics showing total downloads, videos vs playlists breakdown, total size, total duration, and history file location.*
+
+## 📥 Download
+
+### Quick Download (Recommended)
+
+Download the pre-built installer for Windows:
+
+- **📦 Installer**: [Download YouTube Video Downloader v1.1.0](https://github.com/raihannishat/youtube-video-downloader/releases/latest)
+  - File: `YouTubeVideoDownloader-Setup-v1.1.0.exe`
+  - Size: ~70-100 MB (includes .NET runtime)
+  - No additional dependencies required
+
+### Build from Source
+
+If you prefer to build from source, see the [Installation Guide](#-installation-guide) section below.
+
+**Note**: After downloading the installer, run it and follow the installation wizard. The installer will automatically set up all required components.
+
+### System Requirements
+
+- **OS**: Windows 10/11 (64-bit)
+- **RAM**: 2 GB minimum
+- **Disk Space**: 200 MB for installation
+- **Internet**: Required for downloading videos and FFmpeg setup
 
 ## ✨ Features
 
@@ -50,6 +107,12 @@ A powerful, feature-rich console-based YouTube video downloader built with C# an
 - **🏗️ Clean Architecture**: Vertical Slice Architecture with Dependency Injection
 - **✅ Unit Tests**: Comprehensive unit test coverage with xUnit and FluentAssertions
 - **🌐 URL Normalization**: Automatically handles YouTube URLs with or without protocol
+- **⚙️ Configuration File**: Persistent configuration with JSON-based settings
+- **📋 Playlist Download**: Download entire playlists with automatic folder creation
+- **📁 Custom Output Directory**: Choose custom download locations
+- **📄 Batch Download**: Download multiple videos/playlists from a file or direct URLs
+- **📜 Download History**: Track all downloads with detailed information and statistics
+- **📑 Paged History View**: Browse download history with 25 entries per page navigation
 
 
 ## 🛠️ Technologies Used
@@ -249,7 +312,12 @@ When you run the application for the first time:
    - This is a one-time process (approximately 50-100 MB download)
    - FFmpeg will be stored in the application directory
 
-2. **Log Files**
+2. **Configuration File**
+   - Configuration file will be created in `%AppData%\YoutubeVideoDownloader\config.json`
+   - Default settings are automatically configured
+   - You can customize settings via the configuration menu (type `c` in the app)
+
+3. **Log Files**
    - Log files will be created in `logs/` directory
    - Logs are automatically rotated daily
 
@@ -368,6 +436,8 @@ This script will:
 2. ✅ Create a professional installer using Inno Setup
 3. ✅ Bundle all dependencies automatically
 
+**Installer Output Location**: `installer\YouTubeVideoDownloader-Setup-v1.1.0.exe`
+
 ### Installer Options
 
 #### Option 1: Self-Contained Executable (Simplest)
@@ -398,7 +468,7 @@ Creates a professional Windows installer with:
 1. Install Inno Setup
 2. Open `installer.iss` in Inno Setup Compiler
 3. Click "Build" → "Compile"
-4. Installer will be in `installer/` folder
+4. Installer will be created at: `installer\YouTubeVideoDownloader-Setup-v1.1.0.exe`
 
 ### What Gets Auto-Resolved?
 
@@ -474,12 +544,21 @@ For comprehensive instructions on creating installers, see [installer-guide.md](
 
 - **`q` or `Q`** - Quit the application
 - **`a` or `i`** - Show about/information page
+- **`b` or `B`** - Batch download from file or direct URLs
+- **`c` or `C`** - Open configuration menu
+- **`h` or `H`** - View download history
 - **Enter** (empty input) - Select highest available quality
 
 ### Example
 
 ```
-📺 Enter YouTube Video URL (or 'q'/'Q' to quit, 'a'/'i' for about): https://youtu.be/VIDEO_ID
+📺 Enter YouTube Video/Playlist URL
+('q'/'Q' for quit)
+('a'/'i' for about)
+('b'/'B' for batch)
+('c'/'C' for config)
+('h'/'H' for history)
+please URL : https://youtu.be/VIDEO_ID
 
 📹 Video Information
 Title: Example Video
@@ -517,12 +596,18 @@ The project follows **Vertical Slice Architecture**, organizing code by features
 src/YoutubeVideoDownloader.Console/
 ├── Core/                    # Core business logic
 │   ├── Interfaces/          # Service interfaces
+│   ├── Models/              # Data models (AppConfiguration)
 │   ├── Services/            # Service implementations
 │   └── DependencyInjection/ # DI configuration
 ├── Features/                # Feature-specific handlers
 │   ├── About/               # About page feature
+│   ├── BatchDownload/       # Batch download feature
+│   ├── Configuration/       # Configuration management
+│   ├── DirectorySelection/  # Directory selection feature
 │   ├── Download/            # Download feature
+│   ├── DownloadHistory/     # Download history feature
 │   ├── FFmpegSetup/         # FFmpeg setup feature
+│   ├── Playlist/            # Playlist download feature
 │   ├── StreamSelection/     # Stream selection feature
 │   └── VideoInfo/           # Video info display feature
 ├── Common/                  # Shared utilities
@@ -542,6 +627,8 @@ All services are registered using Microsoft.Extensions.DependencyInjection:
 - **IDownloadAndMergeService** → **DownloadAndMergeHandler**
 - **IApplicationService** → **ApplicationService**
 - **ILoggerService** → **SerilogLoggerService**
+- **IConfigurationService** → **ConfigurationService**
+- **IDownloadHistoryService** → **DownloadHistoryService**
 
 ### Design Patterns
 
@@ -567,12 +654,18 @@ youtube-video-downloader/
     │   └── YoutubeVideoDownloader.Console/
     │       ├── Core/
     │       │   ├── Interfaces/          # Service interfaces
+    │       │   ├── Models/              # Data models (AppConfiguration)
     │       │   ├── Services/            # Service implementations
     │       │   └── DependencyInjection/ # DI setup
     │       ├── Features/                # Feature handlers
     │       │   ├── About/
+    │       │   ├── BatchDownload/
+    │       │   ├── Configuration/
+    │       │   ├── DirectorySelection/
     │       │   ├── Download/
+    │       │   ├── DownloadHistory/
     │       │   ├── FFmpegSetup/
+    │       │   ├── Playlist/
     │       │   ├── StreamSelection/
     │       │   └── VideoInfo/
     │       ├── Common/                  # Shared code
@@ -630,6 +723,158 @@ dotnet test --filter "FullyQualifiedName~FileUtilsTests"
 - **Total Tests**: 51
 - **Test Framework**: xUnit
 - **Assertion Library**: FluentAssertions
+
+## ⚙️ Configuration
+
+The application supports persistent configuration through a JSON-based configuration file. All settings are saved automatically and persist across sessions.
+
+### Configuration File Location
+
+**Windows:**
+```
+C:\Users\<YourUsername>\AppData\Roaming\YoutubeVideoDownloader\config.json
+```
+
+The configuration file is automatically created on first run with default values.
+
+### Accessing Configuration
+
+1. **From Main Menu**: Type `c` or `C` when prompted for a URL
+2. **Configuration Menu Options**:
+   - **View Configuration** - Display current settings
+   - **Edit Configuration** - Modify settings interactively
+   - **Reset to Defaults** - Restore default configuration
+
+### Configuration Options
+
+| Setting | Description | Default Value |
+|---------|-------------|---------------|
+| **DefaultDownloadDirectory** | Default folder for downloads | `%UserProfile%\Downloads` |
+| **DefaultQuality** | Default quality preference | `highest` |
+| **CustomFFmpegPath** | Custom FFmpeg executable path | `null` (auto-detect) |
+| **LogLevel** | Logging verbosity level | `Information` |
+| **AutoCreatePlaylistFolder** | Auto-create folders for playlists | `true` |
+| **ShowVideoInfoBeforeDownload** | Display video info before download | `true` |
+| **MaxConcurrentDownloads** | Maximum concurrent downloads | `1` |
+
+### Quality Options
+
+The `DefaultQuality` setting accepts:
+- **`highest`** - Always download highest available quality
+- **`720p`** - Prefer 720p quality
+- **`1080p`** - Prefer 1080p quality
+- **`audio`** - Audio-only downloads
+- **`prompt`** or empty - Always prompt for quality selection
+
+### Example Configuration File
+
+```json
+{
+  "DefaultDownloadDirectory": "C:\\Users\\YourName\\Downloads",
+  "DefaultQuality": "highest",
+  "CustomFFmpegPath": null,
+  "LogLevel": "Information",
+  "AutoCreatePlaylistFolder": true,
+  "ShowVideoInfoBeforeDownload": true,
+  "MaxConcurrentDownloads": 1
+}
+```
+
+### Editing Configuration
+
+1. Run the application
+2. Type `c` when prompted
+3. Select **"Edit Configuration"**
+4. Follow the interactive prompts to modify settings
+5. Changes are saved automatically
+
+### Manual Configuration Editing
+
+You can also edit the configuration file directly:
+
+1. Navigate to: `%AppData%\YoutubeVideoDownloader\`
+2. Open `config.json` in a text editor
+3. Modify the values (ensure valid JSON format)
+4. Save the file
+5. Restart the application
+
+**Note**: Invalid JSON will cause the application to use default values.
+
+## 📜 Download History
+
+The application automatically tracks all your downloads, storing detailed information about each video or playlist you download. This feature helps you keep track of what you've downloaded and provides useful statistics.
+
+### History File Location
+
+**Windows:**
+```
+C:\Users\<YourUsername>\AppData\Roaming\YoutubeVideoDownloader\download-history.json
+```
+
+The history file is automatically created on first download and persists across sessions.
+
+### Accessing Download History
+
+1. **From Main Menu**: Type `h` or `H` when prompted for a URL
+2. **History Menu Options**:
+   - **View History (Summary)** - Table view with 25 entries per page
+   - **View History (Detailed)** - Detailed panel view with 25 entries per page
+   - **View Statistics** - Overall download statistics
+   - **Clear History** - Remove all history entries
+
+### History Features
+
+- **📑 Paged Navigation**: Browse through history with 25 entries per page
+- **📊 Summary View**: Quick overview with title, quality, size, and date
+- **📋 Detailed View**: Complete information including channel, duration, file path, and URL
+- **📈 Statistics**: Total downloads, file sizes, durations, and breakdown by type
+- **🔍 Automatic Tracking**: Every successful download is automatically saved
+- **💾 Persistent Storage**: History persists across application restarts
+- **📝 Entry Limit**: Keeps last 1000 entries to prevent file from growing too large
+
+### History Entry Information
+
+Each history entry contains:
+- **Video ID** - Unique YouTube video identifier
+- **Video Title** - Full video title
+- **Channel Name** - Video creator/channel
+- **Video URL** - Original YouTube URL
+- **File Path** - Local file location
+- **Quality** - Selected download quality
+- **File Size** - Download file size in bytes
+- **Download Date** - When the download completed
+- **Duration** - Video duration
+- **Is Playlist** - Whether it's from a playlist
+- **Playlist Title** - Playlist name (if applicable)
+
+### Navigation in History View
+
+When viewing history:
+- **Previous Page** - Navigate to previous 25 entries (if available)
+- **Next Page** - Navigate to next 25 entries (if available)
+- **Back** - Return to history menu
+
+### Example History Statistics
+
+```
+📊 Download Statistics
+Total Downloads: 150
+Videos: 120
+Playlists: 30
+Total Size: 45.2 GB
+Total Duration: 25h 30m 15s
+History File: C:\Users\...\download-history.json
+```
+
+### Clearing History
+
+To clear all download history:
+1. Access history menu (type `h`)
+2. Select **"Clear History"**
+3. Confirm the action
+4. All history entries will be removed
+
+**Note**: Clearing history is permanent and cannot be undone.
 
 ## 📝 Logging
 
@@ -709,12 +954,11 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## 🔮 Future Enhancements
 
-- [ ] Playlist download support
-- [ ] Subtitle download
-- [ ] Custom output directory selection
-- [ ] Batch download from file
-- [ ] Cross-platform FFmpeg support
-- [ ] Configuration file support
+- [x] Playlist download support ✅
+- [x] Custom output directory selection ✅
+- [x] Batch download from file ✅
+- [x] Configuration file support ✅
+- [x] Download history ✅
 
 ## 📞 Support
 
@@ -722,5 +966,5 @@ For issues, questions, or contributions, please open an issue on GitHub.
 
 ---
 
-**Version**: 1.0.0  
+**Version**: 1.1.0  
 **Last Updated**: December 2025

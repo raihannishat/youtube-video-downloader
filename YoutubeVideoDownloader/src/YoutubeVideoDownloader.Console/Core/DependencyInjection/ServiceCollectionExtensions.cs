@@ -9,6 +9,12 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<ILogger>(logger);
         services.AddSingleton<ILoggerService, SerilogLoggerService>();
 
+        // Register configuration service first (others may depend on it)
+        services.AddSingleton<IConfigurationService, ConfigurationService>();
+
+        // Register download history service
+        services.AddSingleton<IDownloadHistoryService, DownloadHistoryService>();
+
         // Register services
         services.AddSingleton<IYouTubeService, YouTubeService>();
         services.AddSingleton<IDownloadService, DownloadService>();

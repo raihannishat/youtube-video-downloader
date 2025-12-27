@@ -4,7 +4,7 @@
 [Setup]
 AppId={{8A5F8B2E-3C4D-4E5F-9A6B-7C8D9E0F1A2B}
 AppName=YouTube Video Downloader
-AppVersion=1.0.0
+AppVersion=1.1.0
 AppPublisher=Raihan Nishat
 AppPublisherURL=https://github.com/raihannishat
 AppSupportURL=https://github.com/raihannishat/youtube-video-downloader
@@ -14,7 +14,7 @@ DefaultGroupName=YouTube Video Downloader
 AllowNoIcons=yes
 LicenseFile=
 OutputDir=installer
-OutputBaseFilename=YouTubeVideoDownloader-Setup-v1.0.0
+OutputBaseFilename=YouTubeVideoDownloader-Setup-v1.1.0
 SetupIconFile=icon.ico
 Compression=lzma2
 SolidCompression=yes
@@ -35,14 +35,17 @@ Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescrip
 ; Application files (self-contained build)
 Source: "YoutubeVideoDownloader\src\YoutubeVideoDownloader.Console\bin\Release\net10.0\win-x64\publish\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 
+; Include icon file
+Source: "icon.ico"; DestDir: "{app}"; Flags: ignoreversion
+
 ; Optional: Bundle FFmpeg (uncomment if you want to include FFmpeg)
 ; Source: "ffmpeg\*"; DestDir: "{app}\ffmpeg"; Flags: ignoreversion recursesubdirs createallsubdirs
 
 [Icons]
-Name: "{group}\YouTube Video Downloader"; Filename: "{app}\YoutubeVideoDownloader.Console.exe"
+Name: "{group}\YouTube Video Downloader"; Filename: "{app}\YoutubeVideoDownloader.Console.exe"; IconFilename: "{app}\icon.ico"
 Name: "{group}\{cm:UninstallProgram,YouTube Video Downloader}"; Filename: "{uninstallexe}"
-Name: "{autodesktop}\YouTube Video Downloader"; Filename: "{app}\YoutubeVideoDownloader.Console.exe"; Tasks: desktopicon
-Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\YouTube Video Downloader"; Filename: "{app}\YoutubeVideoDownloader.Console.exe"; Tasks: quicklaunchicon; OnlyBelowVersion: 6.1
+Name: "{autodesktop}\YouTube Video Downloader"; Filename: "{app}\YoutubeVideoDownloader.Console.exe"; IconFilename: "{app}\icon.ico"; Tasks: desktopicon
+Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\YouTube Video Downloader"; Filename: "{app}\YoutubeVideoDownloader.Console.exe"; IconFilename: "{app}\icon.ico"; Tasks: quicklaunchicon; OnlyBelowVersion: 6.1
 
 [Run]
 Filename: "{app}\YoutubeVideoDownloader.Console.exe"; Description: "{cm:LaunchProgram,YouTube Video Downloader}"; Flags: nowait postinstall skipifsilent

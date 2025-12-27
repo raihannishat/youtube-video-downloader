@@ -446,14 +446,14 @@ coverage/
 # Project-specific
 *.Backup.tmp
 
-# Installer output (but allow .exe files in installer folder)
-installer/
-*.msi
-
 # Ignore all .exe files (build outputs in bin/ and obj/)
 *.exe
-# But allow .exe files in installer folder
+# But allow installer folder and .exe files inside it
+!installer/
 !installer/*.exe
+
+# Installer output
+*.msi
 
 # FFmpeg (auto-downloaded)
 ffmpeg/

@@ -32,7 +32,7 @@ public static class AboutHandler
             "[dim]• YoutubeExplode[/]\n" +
             "[dim]• FFMpegCore[/]\n" +
             "[dim]• Spectre.Console[/]\n\n" +
-            "[bold yellow]Version:[/] [cyan]1.0.0[/]\n" +
+            "[bold yellow]Version:[/] [cyan]1.1.0[/]\n" +
             "[dim]© 2025 All rights reserved[/]");
         
         aboutContent.Border = BoxBorder.Rounded;
