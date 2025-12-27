@@ -34,5 +34,48 @@ public class YouTubeServiceTests
         service.Should().NotBeNull();
         _loggerMock.VerifyNoOtherCalls();
     }
+
+    [Fact]
+    public void Constructor_WithNullLogger_ShouldThrowArgumentNullException()
+    {
+        // Act & Assert
+        var action = () => new YouTubeService(null!);
+        action.Should().Throw<ArgumentNullException>();
+    }
+
+    [Fact]
+    public async Task GetPlaylistAsync_ShouldReturnPlaylist()
+    {
+        // Arrange
+        var playlistId = YoutubeExplode.Playlists.PlaylistId.Parse("PLrAXtmRdnEQy6nuLMH7FPR8-O7LxYqkfX");
+
+        // Act
+        var playlist = await _service.GetPlaylistAsync(playlistId);
+
+        // Assert
+        playlist.Should().NotBeNull();
+        playlist.Id.Should().Be(playlistId);
+        _loggerMock.Verify(x => x.LogInformation(It.IsAny<string>()), Times.AtLeastOnce);
+    }
+
+    [Fact]
+    public async Task GetPlaylistVideosAsync_ShouldReturnVideos()
+    {
+        // Arrange
+        var playlistId = YoutubeExplode.Playlists.PlaylistId.Parse("PLrAXtmRdnEQy6nuLMH7FPR8-O7LxYqkfX");
+        var videos = new List<YoutubeExplode.Playlists.PlaylistVideo>();
+
+        // Act
+        await foreach (var video in _service.GetPlaylistVideosAsync(playlistId))
+        {
+            videos.Add(video);
+            if (videos.Count >= 5) break; // Limit to first 5 for testing
+        }
+
+        // Assert
+        videos.Should().NotBeEmpty();
+        videos.Should().OnlyContain(v => v != null);
+        _loggerMock.Verify(x => x.LogInformation(It.IsAny<string>()), Times.AtLeastOnce);
+    }
 }
 

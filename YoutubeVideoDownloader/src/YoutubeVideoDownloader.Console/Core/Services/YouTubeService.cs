@@ -7,6 +7,7 @@ public class YouTubeService : IYouTubeService
 
     public YouTubeService(ILoggerService logger)
     {
+        ArgumentNullException.ThrowIfNull(logger);
         _client = new YoutubeClient();
         _logger = logger;
     }
@@ -32,6 +33,24 @@ public class YouTubeService : IYouTubeService
         _logger.LogInformation($"Starting download: {filePath}");
         await _client.Videos.Streams.DownloadAsync(streamInfo, filePath, progress);
         _logger.LogInformation($"Download completed: {filePath}");
+    }
+
+    public async Task<YoutubeExplode.Playlists.Playlist> GetPlaylistAsync(YoutubeExplode.Playlists.PlaylistId playlistId)
+    {
+        _logger.LogInformation($"Fetching playlist information for: {playlistId}");
+        var playlist = await _client.Playlists.GetAsync(playlistId);
+        _logger.LogInformation($"Playlist fetched: {playlist.Title}");
+        return playlist;
+    }
+
+    public async IAsyncEnumerable<YoutubeExplode.Playlists.PlaylistVideo> GetPlaylistVideosAsync(YoutubeExplode.Playlists.PlaylistId playlistId)
+    {
+        _logger.LogInformation($"Fetching playlist videos for: {playlistId}");
+        await foreach (var video in _client.Playlists.GetVideosAsync(playlistId))
+        {
+            _logger.LogInformation($"Playlist video fetched: {video.Title}");
+            yield return video;
+        }
     }
 }
 
