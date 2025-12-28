@@ -484,7 +484,7 @@ public class ApplicationService : IApplicationService
                         continue;
                     }
 
-                    string outputFilePath;
+                    string? outputFilePath = null;
 
                     // Apply quality choice
                     if (string.IsNullOrWhiteSpace(qualityChoice))
@@ -560,6 +560,34 @@ public class ApplicationService : IApplicationService
 
                     successCount++;
                     _logger.LogInformation($"Downloaded video {i + 1}/{totalVideos}: {video.Title}");
+
+                    // Save to download history only if download was successful
+                    if (outputFilePath != null)
+                    {
+                        try
+                        {
+                            var fileInfo = new FileInfo(outputFilePath);
+                            var historyEntry = new DownloadHistoryEntry
+                            {
+                                VideoId = video.Id.ToString(),
+                                VideoTitle = video.Title,
+                                ChannelName = video.Author.ChannelTitle,
+                                VideoUrl = $"https://www.youtube.com/watch?v={video.Id}",
+                                FilePath = outputFilePath,
+                                Quality = qualityChoice == string.Empty ? "highest" : qualityChoice,
+                                FileSizeBytes = fileInfo.Exists ? fileInfo.Length : 0,
+                                DownloadDate = DateTime.Now,
+                                Duration = video.Duration ?? TimeSpan.Zero,
+                                IsPlaylist = true,
+                                PlaylistTitle = playlist.Title
+                            };
+                            _downloadHistoryService.AddHistoryEntry(historyEntry);
+                        }
+                        catch (Exception ex)
+                        {
+                            _logger.LogWarning($"Failed to save download history for video {video.Title}: {ex.Message}");
+                        }
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -1212,7 +1240,7 @@ public class ApplicationService : IApplicationService
                     continue;
                 }
 
-                string outputFilePath;
+                string? outputFilePath = null;
 
                 // Apply quality choice (same logic as regular playlist download)
                 if (string.IsNullOrWhiteSpace(qualityChoice))
@@ -1265,6 +1293,34 @@ public class ApplicationService : IApplicationService
                         var bestAudio = videoAudioStreams.First();
                         outputFilePath = Path.Combine(playlistFolder, $"{FileUtils.SanitizeFileName(video.Title)}.mp4");
                         await _downloadAndMergeService.DownloadAndMergeAsync(selectedVideo, bestAudio, outputFilePath);
+                    }
+                }
+
+                // Save to download history only if download was successful
+                if (outputFilePath != null)
+                {
+                    try
+                    {
+                        var fileInfo = new FileInfo(outputFilePath);
+                        var historyEntry = new DownloadHistoryEntry
+                        {
+                            VideoId = video.Id.ToString(),
+                            VideoTitle = video.Title,
+                            ChannelName = video.Author.ChannelTitle,
+                            VideoUrl = $"https://www.youtube.com/watch?v={video.Id}",
+                            FilePath = outputFilePath,
+                            Quality = qualityChoice == string.Empty ? "highest" : qualityChoice,
+                            FileSizeBytes = fileInfo.Exists ? fileInfo.Length : 0,
+                            DownloadDate = DateTime.Now,
+                            Duration = video.Duration ?? TimeSpan.Zero,
+                            IsPlaylist = true,
+                            PlaylistTitle = playlist.Title
+                        };
+                        _downloadHistoryService.AddHistoryEntry(historyEntry);
+                    }
+                    catch (Exception ex)
+                    {
+                        _logger.LogWarning($"Failed to save download history for video {video.Title}: {ex.Message}");
                     }
                 }
             }
