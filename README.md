@@ -397,8 +397,8 @@ dotnet test test/YoutubeVideoDownloader.Console.Tests/YoutubeVideoDownloader.Con
 **Expected Output:**
 ```
 Test Run Successful.
-Total tests: 51
-     Passed: 51
+Total tests: 81
+     Passed: 81
      Failed: 0
 ```
 
@@ -438,7 +438,7 @@ This script will:
 2. ✅ Create a professional installer using Inno Setup
 3. ✅ Bundle all dependencies automatically
 
-**Installer Output Location**: `installer\YouTubeVideoDownloader-Setup-v1.2.1.exe`
+**Installer Output Location**: `installer\YouTubeVideoDownloader-Setup-v1.2.2.exe`
 
 ### Installer Options
 
@@ -470,7 +470,7 @@ Creates a professional Windows installer with:
 1. Install Inno Setup
 2. Open `installer.iss` in Inno Setup Compiler
 3. Click "Build" → "Compile"
-4. Installer will be created at: `installer\YouTubeVideoDownloader-Setup-v1.2.1.exe`
+4. Installer will be created at: `installer\YouTubeVideoDownloader-Setup-v1.2.2.exe`
 
 ### What Gets Auto-Resolved?
 
@@ -786,7 +786,7 @@ dotnet test --filter "FullyQualifiedName~FileUtilsTests"
 
 ### Test Statistics
 
-- **Total Tests**: 51
+- **Total Tests**: 81
 - **Test Framework**: xUnit
 - **Assertion Library**: FluentAssertions
 
