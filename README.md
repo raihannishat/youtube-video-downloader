@@ -1032,5 +1032,5 @@ For issues, questions, or contributions, please open an issue on GitHub.
 
 ---
 
-**Version**: 1.2.1  
+**Version**: 1.2.2  
 **Last Updated**: December 2025
