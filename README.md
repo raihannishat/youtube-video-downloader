@@ -77,8 +77,8 @@ A powerful, feature-rich console-based YouTube video downloader built with C# an
 
 Download the pre-built installer for Windows:
 
-- **📦 Installer**: [Download YouTube Video Downloader v1.2.3](https://github.com/raihannishat/youtube-video-downloader/releases/latest/download/YouTubeVideoDownloader-Setup-v1.2.3.exe) (Direct Download)
-  - File: `YouTubeVideoDownloader-Setup-v1.2.3.exe`
+- **📦 Installer**: [Download YouTube Video Downloader v2.1.0](https://github.com/raihannishat/youtube-video-downloader/releases/latest/download/YouTubeVideoDownloader-Setup-v2.1.0.exe) (Direct Download)
+  - File: `YouTubeVideoDownloader-Setup-v2.1.0.exe`
   - Size: ~70-100 MB (includes .NET runtime)
   - No additional dependencies required
   - **Direct download**: Click the link above to automatically download the installer
@@ -438,7 +438,7 @@ This script will:
 2. ✅ Create a professional installer using Inno Setup
 3. ✅ Bundle all dependencies automatically
 
-**Installer Output Location**: `installer\YouTubeVideoDownloader-Setup-v1.2.3.exe`
+**Installer Output Location**: `installer\YouTubeVideoDownloader-Setup-v2.1.0.exe`
 
 ### Installer Options
 
@@ -470,7 +470,7 @@ Creates a professional Windows installer with:
 1. Install Inno Setup
 2. Open `installer.iss` in Inno Setup Compiler
 3. Click "Build" → "Compile"
-4. Installer will be created at: `installer\YouTubeVideoDownloader-Setup-v1.2.3.exe`
+4. Installer will be created at: `installer\YouTubeVideoDownloader-Setup-v2.1.0.exe`
 
 ### What Gets Auto-Resolved?
 
@@ -690,7 +690,7 @@ youtube-video-downloader/
 │   └── 08-download_statistics.png
 ├── installer/                   # Installer output directory
 │   ├── .gitkeep                # Keep folder in Git
-│   └── YouTubeVideoDownloader-Setup-v1.2.3.exe
+│   └── YouTubeVideoDownloader-Setup-v2.1.0.exe
 └── YoutubeVideoDownloader/
     ├── src/
     │   └── YoutubeVideoDownloader.Console/
@@ -1052,5 +1052,5 @@ For issues, questions, or contributions, please open an issue on GitHub.
 
 ---
 
-**Version**: 1.2.3  
+**Version**: 2.1.0  
 **Last Updated**: December 2025

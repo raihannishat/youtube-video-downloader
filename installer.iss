@@ -4,7 +4,7 @@
 [Setup]
 AppId={{8A5F8B2E-3C4D-4E5F-9A6B-7C8D9E0F1A2B}
 AppName=YouTube Video Downloader
-AppVersion=1.2.3
+AppVersion=2.1.0
 AppPublisher=Raihan Nishat
 AppPublisherURL=https://github.com/raihannishat
 AppSupportURL=https://github.com/raihannishat/youtube-video-downloader
@@ -14,7 +14,7 @@ DefaultGroupName=YouTube Video Downloader
 AllowNoIcons=yes
 LicenseFile=
 OutputDir=installer
-OutputBaseFilename=YouTubeVideoDownloader-Setup-v1.2.3
+OutputBaseFilename=YouTubeVideoDownloader-Setup-v2.1.0
 SetupIconFile=icon.ico
 Compression=lzma2
 SolidCompression=yes
