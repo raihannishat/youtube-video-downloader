@@ -1,4 +1,4 @@
-# How to Create GitHub Release v1.2.2
+# How to Create GitHub Release v1.2.3
 
 This guide will help you create a GitHub release and upload the installer file.
 
@@ -24,10 +24,10 @@ This guide will help you create a GitHub release and upload the installer file.
    - Clean previous builds
    - Restore NuGet packages
    - Build the self-contained application
-   - Create the installer (`installer\YouTubeVideoDownloader-Setup-v1.2.2.exe`)
+   - Create the installer (`installer\YouTubeVideoDownloader-Setup-v1.2.3.exe`)
 
 3. **Verify the installer exists**:
-   - Check: `installer\YouTubeVideoDownloader-Setup-v1.2.2.exe`
+   - Check: `installer\YouTubeVideoDownloader-Setup-v1.2.3.exe`
 
 ### Step 2: Commit and Push Changes
 
@@ -38,7 +38,7 @@ This guide will help you create a GitHub release and upload the installer file.
 
 2. **Commit changes**:
    ```bash
-   git commit -m "Release v1.2.2 - Fixed playlist download history tracking"
+   git commit -m "Release v1.2.3 - Menu-driven interface and improved default directory handling"
    ```
 
 3. **Push to GitHub**:
@@ -58,16 +58,22 @@ This guide will help you create a GitHub release and upload the installer file.
    - Click "Draft a new release" or "Create a new release"
 
 3. **Fill Release Details**
-   - **Tag version**: `v1.2.2` (create new tag)
-   - **Release title**: `YouTube Video Downloader v1.2.2`
+   - **Tag version**: `v1.2.3` (create new tag)
+   - **Release title**: `YouTube Video Downloader v1.2.3`
    - **Description**: 
      ```markdown
-     ## 🎉 YouTube Video Downloader v1.2.2
+     ## 🎉 YouTube Video Downloader v1.2.3
+
+     ### ✨ New Features
+     - 📋 Menu-driven interface with separate menus for each feature
+     - 🎨 Improved UI with automatic screen clearing after menu operations
+     - ⚙️ Enhanced default directory handling from configuration
 
      ### 🐛 Bug Fixes
      - Fixed playlist downloads not being saved to history
      - Fixed playlist downloads not showing in statistics
      - Improved history tracking for batch playlist downloads
+     - Fixed default download directory not respecting configuration
 
      ### ✨ Features
      - 📜 Download History with pagination (25 entries per page)
@@ -83,7 +89,7 @@ This guide will help you create a GitHub release and upload the installer file.
 4. **Upload Installer**
    - Scroll down to "Attach binaries by dropping them here or selecting them"
    - Click "Choose your files"
-   - Select: `installer\YouTubeVideoDownloader-Setup-v1.2.2.exe`
+   - Select: `installer\YouTubeVideoDownloader-Setup-v1.2.3.exe`
    - Wait for upload to complete
 
 5. **Publish Release**
@@ -94,8 +100,8 @@ This guide will help you create a GitHub release and upload the installer file.
 
 1. **Create and Push Tag**:
    ```bash
-   git tag -a v1.2.2 -m "Release version 1.2.2"
-   git push origin v1.2.2
+   git tag -a v1.2.3 -m "Release version 1.2.3"
+   git push origin v1.2.3
    ```
 
 2. **Then follow Option A steps 2-5** to create the release on GitHub web interface
@@ -103,7 +109,7 @@ This guide will help you create a GitHub release and upload the installer file.
 ### Step 4: Verify Release
 
 After creating the release, verify the direct download link works:
-- https://github.com/raihannishat/youtube-video-downloader/releases/latest/download/YouTubeVideoDownloader-Setup-v1.2.2.exe
+- https://github.com/raihannishat/youtube-video-downloader/releases/latest/download/YouTubeVideoDownloader-Setup-v1.2.3.exe
 
 This link should automatically download the installer file.
 
@@ -112,8 +118,8 @@ This link should automatically download the installer file.
 - **File too large**: GitHub has a 2GB limit for releases. The installer (~70-100 MB) should be fine.
 - **Link not working**: Make sure:
   - The release is published (not draft)
-  - The file name matches exactly: `YouTubeVideoDownloader-Setup-v1.2.2.exe`
-  - The tag is `v1.2.2`
+  - The file name matches exactly: `YouTubeVideoDownloader-Setup-v1.2.3.exe`
+  - The tag is `v1.2.3`
 - **Build fails**: Make sure:
   - .NET SDK is installed
   - All dependencies are restored

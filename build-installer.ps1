@@ -89,7 +89,7 @@ if ($innoSetupFound) {
     if ($LASTEXITCODE -eq 0) {
         Write-Host "✓ Installer created successfully!" -ForegroundColor Green
         Write-Host ""
-        Write-Host "Installer location: installer\YouTubeVideoDownloader-Setup-v1.2.2.exe" -ForegroundColor Cyan
+        Write-Host "Installer location: installer\YouTubeVideoDownloader-Setup-v1.2.3.exe" -ForegroundColor Cyan
     } else {
         Write-Host "✗ Installer compilation failed" -ForegroundColor Red
         Write-Host "  Check installer.iss for errors" -ForegroundColor Yellow
@@ -102,7 +102,7 @@ if ($innoSetupFound) {
     Write-Host "  Alternative: Creating ZIP package instead..." -ForegroundColor Cyan
     
     # Create a ZIP package as alternative
-    $zipPath = "installer\YouTubeVideoDownloader-v1.2.2.zip"
+    $zipPath = "installer\YouTubeVideoDownloader-v1.2.3.zip"
     $exePath = "YoutubeVideoDownloader\$publishPath\YoutubeVideoDownloader.Console.exe"
     
     if (Test-Path $exePath) {
@@ -112,7 +112,7 @@ if ($innoSetupFound) {
         }
         
         # Create ZIP file
-        $zipFullPath = Resolve-Path "installer" | Join-Path -ChildPath "YouTubeVideoDownloader-v1.2.2.zip"
+        $zipFullPath = Resolve-Path "installer" | Join-Path -ChildPath "YouTubeVideoDownloader-v1.2.3.zip"
         $exeFullPath = Resolve-Path $exePath
         
         Compress-Archive -Path $exeFullPath -DestinationPath $zipFullPath -Force
