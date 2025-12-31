@@ -23,23 +23,23 @@ A powerful, feature-rich console-based YouTube video downloader built with C# an
 
 ## 📸 Screenshots
 
-#### 1. Home Screen
+#### 1. Main Menu
 
 ![Home Screen](Contents/01-home.png)
 
-*Main application interface showing the welcome screen with ASCII art header and URL input prompt with all available commands.*
+*Main application interface showing the welcome screen with ASCII art header and the main menu with all available options. Select from the menu using arrow keys or type the option number.*
 
 #### 2. About Page
 
 ![About Page](Contents/02-about.png)
 
-*Access the about page by typing 'a' or 'i' when prompted for a URL. The about page displays developer information, application features, technologies used, and version details.*
+*Access the about page by selecting "About" from the main menu. The about page displays developer information, application features, technologies used, and version details.*
 
 #### 3. Configuration Menu
 
 ![Configuration Menu](Contents/03-config.png)
 
-*Configuration menu accessible by typing 'c' or 'C'. View, edit, or reset application settings including default download directory, quality preferences, and logging options.*
+*Configuration menu accessible by selecting "Configuration" from the main menu. View, edit, or reset application settings including default download directory, quality preferences, and logging options.*
 
 #### 4. Download Progress
 
@@ -51,25 +51,25 @@ A powerful, feature-rich console-based YouTube video downloader built with C# an
 
 ![Successfully Downloaded](Contents/05-successfully_downloaded.png)
 
-*Download completion confirmation showing the downloaded file path, size, and location.*
+*Download completion confirmation showing the downloaded file path, size, and location. Press any key to return to the main menu.*
 
 #### 6. Video Quality Options
 
 ![Video Quality Options](Contents/06-video_quality_options.png)
 
-*Available video quality options displayed in a formatted table showing muxed streams, video-only streams, and audio-only options with file sizes.*
+*Available video quality options displayed in a formatted table showing muxed streams, video-only streams, and audio-only options with file sizes. Select quality by entering the option number or press Enter for highest quality.*
 
 #### 7. Download History
 
 ![Download History](Contents/07-download_history.png)
 
-*Download history view showing a paginated list of all downloaded videos with title, quality, size, and download date. Access by typing 'h' or 'H'.*
+*Download history view showing a paginated list of all downloaded videos with title, quality, size, and download date. Access by selecting "Download History" from the main menu. Navigate through pages using Previous/Next Page options.*
 
 #### 8. Download Statistics
 
 ![Download Statistics](Contents/08-download_statistics.png)
 
-*Comprehensive download statistics showing total downloads, videos vs playlists breakdown, total size, total duration, and history file location.*
+*Comprehensive download statistics showing total downloads, videos vs playlists breakdown, total size, total duration, and history file location. Access from the Download History menu.*
 
 ## 📥 Download
 
@@ -528,48 +528,63 @@ For comprehensive instructions on creating installers, see [installer-guide.md](
 1. Run the application using `dotnet run` or execute the compiled binary
 2. The application will display a welcome header and check for FFmpeg
 3. If FFmpeg is not found, it will automatically download and configure it (one-time setup)
+4. The main menu will appear with all available options
+
+### Main Menu Options
+
+The application features a menu-driven interface. From the main menu, you can select:
+
+- **Download Video/Playlist** - Download a single video or entire playlist
+- **Batch Download** - Download multiple videos/playlists from a file or direct URLs
+- **Download History** - View download history, statistics, or clear history
+- **Configuration** - View, edit, or reset application settings
+- **About** - View application information and developer details
+- **Quit** - Exit the application
 
 ### Downloading Videos
 
-1. **Enter YouTube URL**: When prompted, paste a YouTube video URL
+1. **Select "Download Video/Playlist"** from the main menu
+
+2. **Enter YouTube URL**: When prompted, paste a YouTube video URL
    - Supports full URLs: `https://www.youtube.com/watch?v=VIDEO_ID`
    - Supports short URLs: `https://youtu.be/VIDEO_ID`
+   - Supports playlist URLs: `https://www.youtube.com/playlist?list=PLAYLIST_ID`
    - Auto-adds `https://` if protocol is missing
 
-2. **View Video Information**: The application displays:
+3. **View Video Information**: The application displays:
    - Video title
    - Channel name
    - Duration
 
-3. **Select Quality**: Choose from available options:
+4. **Select Quality**: Choose from available options:
    - **Muxed Streams** (Video + Audio combined) - Ready to download
    - **Higher Quality** (Separate video/audio) - Auto-merged with FFmpeg
    - **Audio Only** - Various bitrate options
+   - Press **Enter** for highest available quality
 
-4. **Download**: The application will:
+5. **Choose Download Location**: 
+   - Default location from configuration will be shown
+   - Press Enter to use default or enter a custom path
+
+6. **Download**: The application will:
    - Show real-time progress with speed and ETA
    - Automatically merge video and audio if needed
-   - Save to your Downloads folder
+   - Save to your selected folder
+   - Display success message
+   - Return to main menu after completion
 
-### Commands
-
-- **`q` or `Q`** - Quit the application
-- **`a` or `i`** - Show about/information page
-- **`b` or `B`** - Batch download from file or direct URLs
-- **`c` or `C`** - Open configuration menu
-- **`h` or `H`** - View download history
-- **Enter** (empty input) - Select highest available quality
-
-### Example
+### Example Workflow
 
 ```
-📺 Enter YouTube Video/Playlist URL
-('q'/'Q' for quit)
-('a'/'i' for about)
-('b'/'B' for batch)
-('c'/'C' for config)
-('h'/'H' for history)
-please URL : https://youtu.be/VIDEO_ID
+📋 Main Menu
+> Download Video/Playlist
+  Batch Download
+  Download History
+  Configuration
+  About
+  Quit
+
+📺 Enter YouTube Video/Playlist URL: https://youtu.be/VIDEO_ID
 
 📹 Video Information
 Title: Example Video
@@ -581,6 +596,9 @@ Available Quality Options:
 2. 1080p (mp4) - 250.3 MB (Auto-merged)
 
 🎯 Select quality (number or Enter for highest): 2
+
+Default: C:\Users\YourName\Downloads
+📂 Enter output directory (or Enter for default): 
 
 Downloading Video Stream...
 [████████████████████] 100% | 5.2 MB/s | ETA: 0s
@@ -594,6 +612,8 @@ Merging video and audio streams...
 ✓ Successfully downloaded!
 📁 File: Example_Video.mp4
 📂 Location: C:\Users\YourName\Downloads\Example_Video.mp4
+
+Press any key to continue...
 ```
 
 
