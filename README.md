@@ -438,11 +438,7 @@ This script will:
 2. ✅ Create a professional installer using Inno Setup
 3. ✅ Bundle all dependencies automatically
 
-<<<<<<< HEAD
 **Installer Output Location**: `installer\YouTubeVideoDownloader-Setup-v1.2.3.exe`
-=======
-**Installer Output Location**: `installer\YouTubeVideoDownloader-Setup-v1.2.2.exe`
->>>>>>> a15bf12777c3cc587b206b1aedc01af9ea35354e
 
 ### Installer Options
 
@@ -474,11 +470,7 @@ Creates a professional Windows installer with:
 1. Install Inno Setup
 2. Open `installer.iss` in Inno Setup Compiler
 3. Click "Build" → "Compile"
-<<<<<<< HEAD
 4. Installer will be created at: `installer\YouTubeVideoDownloader-Setup-v1.2.3.exe`
-=======
-4. Installer will be created at: `installer\YouTubeVideoDownloader-Setup-v1.2.2.exe`
->>>>>>> a15bf12777c3cc587b206b1aedc01af9ea35354e
 
 ### What Gets Auto-Resolved?
 

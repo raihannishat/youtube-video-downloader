@@ -68,19 +68,17 @@ This guide will help you create a GitHub release and upload the installer file.
      - 📋 Menu-driven interface with separate menus for each feature
      - 🎨 Improved UI with automatic screen clearing after menu operations
      - ⚙️ Enhanced default directory handling from configuration
+     - 📜 Download History with pagination (25 entries per page)
+     - ⚙️ Configuration file support
+     - 📄 Batch download from file or direct URLs
+     - 📁 Custom output directory selection
+     - 📋 Playlist download support with history tracking
 
      ### 🐛 Bug Fixes
      - Fixed playlist downloads not being saved to history
      - Fixed playlist downloads not showing in statistics
      - Improved history tracking for batch playlist downloads
      - Fixed default download directory not respecting configuration
-
-     ### ✨ Features
-     - 📜 Download History with pagination (25 entries per page)
-     - ⚙️ Configuration file support
-     - 📄 Batch download from file or direct URLs
-     - 📁 Custom output directory selection
-     - 📋 Playlist download support with history tracking
 
      ### 📦 Installation
      Download the installer and run it. No additional dependencies required.
